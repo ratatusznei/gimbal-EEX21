@@ -1,53 +1,75 @@
-#include <Adafruit_MPU6050.h>
-// https://adafruit.github.io/Adafruit_MPU6050/html/index.html
+#include "I2Cdev.h"
+#include "MPU6050_6Axis_MotionApps_V6_12.h"
 
-Adafruit_MPU6050 mpu;
-struct Vec3 {
-  float x;
-  float y;
-  float z;
-};
+MPU6050 mpu;
 
-Vec3 acc;
-Vec3 gyro;
+// MPU control/status vars
+bool dmpReady = false;  // set true if DMP init was successful
+uint8_t devStatus;      // return status after each device operation (0 = success, !0 = error)
+uint16_t packetSize;    // expected DMP packet size (default is 42 bytes)
+uint8_t fifoBuffer[64]; // FIFO storage buffer
 
-void setup_mpu() {
-  if (mpu.begin()) {
-    mpu.setAccelerometerRange(MPU6050_RANGE_2_G);
-    mpu.setGyroRange(MPU6050_RANGE_250_DEG);
-    mpu.setCycleRate(MPU6050_CYCLE_1_25_HZ);
-  }
-  else {
-    Serial.println("Erro ao iniciar mpu");
-  }
-}
+Quaternion q;           // [w, x, y, z]         quaternion container
 
-void read_mpu() {
-  sensors_event_t a, g; 
-  mpu.getAccelerometerSensor()->getEvent(&a);
-  mpu.getGyroSensor()->getEvent(&g);
-  acc.x = a.acceleration.x;
-  acc.y = a.acceleration.y;
-  acc.z = a.acceleration.z;
-  gyro.x = g.gyro.x;
-  gyro.y = g.gyro.y;
-  gyro.z = g.gyro.z;
-}
 
 void setup() {
-  Serial.begin(9600);
-  setup_mpu();
-  Serial.println("Inicializado");
+  Serial.begin(115200);
+  while (!Serial);
+
+  Serial.println(F("Initializing I2C devices..."));
+  mpu.initialize();
+
+  Serial.println(F("Testing device connections..."));
+  Serial.println(mpu.testConnection() ? F("MPU6050 connection successful") : F("MPU6050 connection failed"));
+
+  delay(2000);
+  Serial.println(F("Initializing DMP..."));
+  devStatus = mpu.dmpInitialize();
+
+  mpu.setXGyroOffset(51);
+  mpu.setYGyroOffset(8);
+  mpu.setZGyroOffset(21);
+  mpu.setXAccelOffset(1150);
+  mpu.setYAccelOffset(-50);
+  mpu.setZAccelOffset(1060);
+
+  if (devStatus == 0) {
+    mpu.CalibrateAccel();
+    mpu.CalibrateGyro();
+    mpu.PrintActiveOffsets();
+
+    Serial.println(F("Enabling DMP..."));
+    mpu.setDMPEnabled(true);
+    Serial.println(F("DMP ready!"));
+    dmpReady = true;
+
+    packetSize = mpu.dmpGetFIFOPacketSize();
+	mpu.setRate(10); // 1kHz / (n + 5)
+  } else {
+    // ERROR!
+    // 1 = initial memory load failed
+    // 2 = DMP configuration updates failed
+    // (if it's going to break, usually the code will be 1)
+    Serial.print(F("DMP Initialization failed (code "));
+    Serial.print(devStatus);
+    Serial.println(F(")"));
+  }
 }
 
 void loop() {
-  read_mpu();
-  float g0 = sqrt(acc.x*acc.x + acc.y*acc.y + acc.z*acc.z);
-  float omega = sqrt(gyro.x*gyro.x + gyro.y*gyro.y + gyro.z*gyro.z);
+  if (!dmpReady) return;
 
-  Serial.print("G: ");
-  Serial.print(g0);
-  Serial.print(", Gyro: ");
-  Serial.println(omega);
-  delay(100);
+  if (mpu.dmpGetCurrentFIFOPacket(fifoBuffer)) {
+
+    mpu.dmpGetQuaternion(&q, fifoBuffer);
+    Serial.print("{\"w\":");
+    Serial.print(q.w);
+    Serial.print(",\"x\":");
+    Serial.print(q.x);
+    Serial.print(",\"y\":");
+    Serial.print(q.y);
+    Serial.print(",\"z\":");
+    Serial.print(q.z);
+    Serial.println("}");
+  }
 }

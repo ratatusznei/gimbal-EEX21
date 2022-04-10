@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Gimbal test</title>
+		<style> body { margin: 0; } </style>
+	</head>
+	<body>
+		<script src="js/three.js"></script>
+		<button onclick="openSerial()"> Abrir serial </button>
+		<script>
+			let onNewAngle = ({x, y, z, w}) => {};
+
+			class LineBreakTransformer extends TransformStream {
+				async transform(chunk, controller) {
+					this.container += chunk;
+					const lines = this.container.split('\r\n');
+					this.container = lines.pop();
+					lines.forEach(line => {
+						try {
+							controller.enqueue(JSON.parse(line));
+						}
+						catch (e) {
+							console.log(line);
+						}
+					});
+				}
+
+				async flush () {
+						try {
+							controller.enqueue(JSON.parse(this.container));
+						}
+						catch (e) {
+							console.log(this.container);
+					}
+				}
+			}
+			async function openSerial() {
+				let port = await navigator.serial.requestPort({ filters: [{usbProductId: 29987, usbVendorId: 6790}]});
+				console.log(await port.getInfo());
+				await port.open({ baudRate: 115200 });
+
+				let decoder = new TextDecoderStream();
+				inputDone = port.readable.pipeTo(decoder.writable);
+				inputStream = decoder.readable.pipeThrough(new TransformStream(new LineBreakTransformer()));
+				reader = inputStream.getReader();
+
+				while (true) {
+					const { value, done } = await reader.read();
+					if (value) {
+						onNewAngle(value);
+					}
+					if (done) {
+						console.log('[readLoop] DONE', done);
+						reader.releaseLock();
+						break;
+					}
+				}
+			}
+
+			// ================================
+			const scene = new THREE.Scene();
+			const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
+
+			const renderer = new THREE.WebGLRenderer();
+			renderer.setSize(window.innerWidth, window.innerHeight - 30);
+			document.body.appendChild( renderer.domElement );
+
+			const geometry = new THREE.BoxGeometry();
+			const material = new THREE.MeshBasicMaterial( { color: 0x12AA12, wireframe: true } );
+			// const material = new THREE.MeshToonMaterial({ color: 0x12AA12 });
+			const cube = new THREE.Mesh( geometry, material );
+			camera.position.z = 1.8;
+			scene.add( cube );
+
+			const ambientLight = new THREE.AmbientLight( 0x333333 );
+			light = new THREE.DirectionalLight( 0xFFFFFF, 1.0 );
+			light.position.set( 3.32, 2.39, 0.7 );
+			scene.add(ambientLight);
+			scene.add(light);
+
+			onNewAngle = ({x, y, z, w}) => {
+				console.debug({x, y, z, w});
+				cube.quaternion.set(
+					z, -0, -y, w
+				);
+			}
+
+
+			function animate() {
+				requestAnimationFrame( animate );
+				renderer.render( scene, camera );
+			}
+			animate();
+		</script>
+	</body>
+</html>
