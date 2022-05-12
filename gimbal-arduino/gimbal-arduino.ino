@@ -1,5 +1,5 @@
 #include "I2Cdev.h"
-#include "MPU6050_6Axis_MotionApps_V6_12.h"
+#include "MPU6050_6Axis_MotionApps612.h"
 #include <Servo.h>
 
 /*
@@ -122,15 +122,15 @@ void loop() {
 		s2.write(120*(euler[1] + 1.) + offset[1]);
 	}
 
-	if(digitalRead(SW) == LOW) {
-		offset[0] = 0;
-		offset[1] = 0;
-		offset[2] = 0;
-	}
+	// if(digitalRead(SW) == LOW) {
+	// 	offset[0] = 0;
+	// 	offset[1] = 0;
+	// 	offset[2] = 0;
+	// }
 
-	int posicaoX = map(analogRead(VRx), 0, 1023, -200, 200);
-	int posicaoY = map(analogRead(VRy), 0, 1023, -200, 200);
+	// int posicaoX = map(analogRead(VRx), 0, 1023, -200, 200);
+	// int posicaoY = map(analogRead(VRy), 0, 1023, -200, 200);
 
-	readJoystick(posicaoX, offset[0]);
-	readJoystick(posicaoY, offset[1]);
+	// readJoystick(posicaoX, offset[0]);
+	// readJoystick(posicaoY, offset[1]);
 }
