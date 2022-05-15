@@ -11,9 +11,9 @@ void setup() {
 	s2.attach(9);
 }
 
-void write() {
-	/* s1.write(120*(-euler[0] + 1.) + offset[0]); */
-	/* s2.write(120*(euler[1] + 1.) + offset[1]); */
+void write(int a1, int a2) {
+	s1.write(a1);
+	s2.write(a2);
 }
 
 }

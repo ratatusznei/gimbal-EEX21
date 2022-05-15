@@ -27,8 +27,7 @@ void setup() {
 }
 
 void loop() {
-	if (!mpu::is_ready()) return;
-
 	mpu::read();
-
+	mpu::print_accel();
+	servos::write(0, 90 - mpu::angle.y);
 }
