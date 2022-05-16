@@ -1,4 +1,4 @@
-#include "imu.hpp"
+#include "Imu.hpp"
 #include "servos.hpp"
 #include "joystick.hpp"
 
@@ -17,23 +17,23 @@ Sequencia de funcionamento (loop):
 // imagens do acelerometro:
 //https://bdm.unb.br/bitstream/10483/23639/1/2018_EduardoSousaSalesRodrigues_tcc.pdf
 
+Imu imu;
+
 void setup() {
 	Serial.begin(115200);
 	while (!Serial);
 
-	imu::begin();
 	joystick::begin();
 	servos::begin();
 }
 
 unsigned long last = 0;
 void loop() {
-	imu::update();
-	imu::print();
+	imu.update();
 
 	unsigned long now = millis();
 	if (now - last > 20) {
-		servos::write(90 - imu::angle.x, 90 - imu::angle.y);
+		servos::write(imu.get_correction_x(), imu.get_correction_y());
 		last = now;
 	}
 }
