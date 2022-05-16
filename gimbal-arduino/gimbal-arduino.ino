@@ -1,5 +1,5 @@
 #include "Imu.hpp"
-#include "servos.hpp"
+#include "ServoController.hpp"
 #include "joystick.hpp"
 
 /*
@@ -18,22 +18,18 @@ Sequencia de funcionamento (loop):
 //https://bdm.unb.br/bitstream/10483/23639/1/2018_EduardoSousaSalesRodrigues_tcc.pdf
 
 Imu imu;
+ServoController servos;
 
 void setup() {
 	Serial.begin(115200);
 	while (!Serial);
-
-	joystick::begin();
-	servos::begin();
 }
 
 unsigned long last = 0;
 void loop() {
 	imu.update();
 
-	unsigned long now = millis();
-	if (now - last > 20) {
-		servos::write(imu.get_correction_x(), imu.get_correction_y());
-		last = now;
-	}
+	servos.set_target(imu.get_correction_x(), imu.get_correction_y());
+
+	servos.update();
 }
