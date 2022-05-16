@@ -6,7 +6,8 @@
 class Imu {
 	MPU6050 mpu;
 public:
-	Imu();
+	Imu(): mpu(Wire) {}
+	void begin();
 	void print();
 	inline void update() { mpu.update(); }
 

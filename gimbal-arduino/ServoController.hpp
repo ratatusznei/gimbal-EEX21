@@ -2,6 +2,7 @@
 #define SERVODRIVER_HPP
 
 #include <Servo.h>
+#include <Arduino.h>
 
 class ServoController {
 	Servo sx;
@@ -13,9 +14,21 @@ class ServoController {
 	unsigned long last_update{0};
 	static constexpr unsigned long update_period = 20; // ms
 public:
-	ServoController();
+	void begin();
 	inline void set_target(int x, int y) { tx = x; ty = y; }
 	void update();
+
+	void print() {
+		Serial.print("Servos: ");
+		Serial.print(x);
+		Serial.print(", ");
+		Serial.print(y);
+		Serial.print(", ");
+		Serial.print(tx);
+		Serial.print(", ");
+		Serial.print(ty);
+		Serial.println();
+	}
 };
 
 #endif // SERVODRIVER_HPP

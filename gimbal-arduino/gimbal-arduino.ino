@@ -22,13 +22,14 @@ ServoController servos;
 
 void setup() {
 	Serial.begin(115200);
-	while (!Serial);
+	imu.begin();
+	servos.begin();
 }
 
-unsigned long last = 0;
 void loop() {
 	imu.update();
 
+	servos.print();
 	servos.set_target(imu.get_correction_x(), imu.get_correction_y());
 
 	servos.update();

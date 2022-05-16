@@ -1,14 +1,16 @@
 #include "ServoController.hpp"
 #include <Arduino.h>
 
-ServoController::ServoController() {
+void ServoController::begin() {
 	sx.attach(8);
-	sx.attach(9);
+	sy.attach(9);
+	sx.write(x);
+	sy.write(y);
 }
 
 void ServoController::update() {
 	unsigned long now = millis();
-	if (last_update - now >= update_period) {
+	if (now - last_update >= update_period) {
 		last_update = now;
 
 		x += (tx - x) / 2;

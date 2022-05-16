@@ -1,6 +1,6 @@
 #include "Imu.hpp"
 
-Imu::Imu(): mpu(Wire) {
+void Imu::begin() {
 	mpu.upsideDownMounting = true;
 	mpu.begin(0, 0);
 	mpu.calcOffsets(true, true);
