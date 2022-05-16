@@ -1,4 +1,4 @@
-#include "mpu.hpp"
+#include "imu.hpp"
 #include "servos.hpp"
 #include "joystick.hpp"
 
@@ -21,13 +21,19 @@ void setup() {
 	Serial.begin(115200);
 	while (!Serial);
 
-	mpu::setup();
-	joystick::setup();
-	servos::setup();
+	imu::begin();
+	joystick::begin();
+	servos::begin();
 }
 
+unsigned long last = 0;
 void loop() {
-	mpu::read();
-	mpu::print_accel();
-	servos::write(0, 90 - mpu::angle.y);
+	imu::update();
+	imu::print();
+
+	unsigned long now = millis();
+	if (now - last > 20) {
+		servos::write(90 - imu::angle.x, 90 - imu::angle.y);
+		last = now;
+	}
 }

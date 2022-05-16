@@ -6,7 +6,7 @@ const int VRx = A0;
 const int VRy = A1;
 const int SW = 2;
 
-void setup() {
+void begin() {
 	pinMode(VRx, INPUT);
 	pinMode(VRy, INPUT);
 	pinMode(SW, INPUT_PULLUP); 

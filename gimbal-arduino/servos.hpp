@@ -6,7 +6,7 @@ namespace servos {
 Servo s1;
 Servo s2;
 
-void setup() {
+void begin() {
 	s1.attach(8);
 	s2.attach(9);
 }

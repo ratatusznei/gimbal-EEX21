@@ -1,8 +1,8 @@
-#ifndef MPU_HPP
-#define MPU_HPP
+#ifndef IMU_HPP
+#define IMU_HPP
 #include "Wire.h"
 #include <MPU6050_light.h>
-namespace mpu{
+namespace imu {
 
 MPU6050 mpu(Wire);
 
@@ -12,21 +12,21 @@ struct Vec3 {
 	float z;
 } angle;
 
-void setup() {
+void begin() {
 	mpu.upsideDownMounting = true;
-	Serial.print("MPU: ");
-	Serial.println(mpu.begin());
+	mpu.begin();
+	// mpu.setFilterGyroCoef(0.98);
 	mpu.calcOffsets(true, true);
 }
 
-void read() {
+void update() {
 	mpu.update();
 	angle.x = mpu.getAngleX();
 	angle.y = mpu.getAngleY();
 	angle.z = mpu.getAngleZ();
 }
 
-void print_accel() {
+void print() {
 	Serial.print(angle.x);
 	Serial.print(", ");
 	Serial.print(angle.y);
@@ -35,4 +35,4 @@ void print_accel() {
 }
 
 }
-#endif // MPU_HPP
+#endif // IMU_HPP
