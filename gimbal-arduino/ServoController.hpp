@@ -11,6 +11,15 @@ class ServoController {
 	int y{90};
 	int tx{90};
 	int ty{90};
+
+	int xf[5]{0};
+	int xs{0};
+	int xi{0};
+
+	int yf[5]{0};
+	int ys{0};
+	int yi{0};
+
 	unsigned long last_update{0};
 	static constexpr unsigned long update_period = 20; // ms
 public:
