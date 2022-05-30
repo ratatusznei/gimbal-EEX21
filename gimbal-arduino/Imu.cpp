@@ -4,7 +4,7 @@ void Imu::begin() {
 	mpu.upsideDownMounting = true;
 	mpu.begin(0, 0);
 	mpu.calcOffsets(true, true);
-	// mpu.setFilterGyroCoef(0.98);
+	mpu.setFilterGyroCoef(0.999);
 }
 
 void Imu::print() {

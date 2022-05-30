@@ -1,6 +1,6 @@
 #include "Imu.hpp"
 #include "ServoController.hpp"
-#include "joystick.hpp"
+#include "Joystick.hpp"
 
 /*
 Sequencia de funcionamento (loop):
@@ -19,18 +19,23 @@ Sequencia de funcionamento (loop):
 
 Imu imu;
 ServoController servos;
+Joystick joystick;
 
 void setup() {
 	Serial.begin(115200);
 	imu.begin();
 	servos.begin();
+	joystick.begin();
 }
 
 void loop() {
 	imu.update();
+	joystick.update();
+	servos.set_target(
+		imu.get_correction_x() + joystick.get_offset_x(),
+		imu.get_correction_y() + joystick.get_offset_y()
+	);
+	servos.update();
 
 	servos.print();
-	servos.set_target(imu.get_correction_x(), imu.get_correction_y());
-
-	servos.update();
 }

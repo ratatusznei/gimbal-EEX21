@@ -11,7 +11,7 @@ public:
 	void print();
 	inline void update() { mpu.update(); }
 
-	inline float get_correction_y() { return 90 - mpu.getAngleY(); }
-	inline float get_correction_x() { return 90 - mpu.getAngleX(); }
+	inline float get_correction_y() { return 90 + mpu.getAngleY(); }
+	inline float get_correction_x() { return 90 + mpu.getAngleX(); }
 };
 #endif // IMU_HPP
