@@ -1,0 +1,30 @@
+%%%% CAPÍTULO 1 - INTRODUÇÃO
+%%
+%% Deve apresentar uma visão global da pesquisa, 
+%% incluindo: breve histórico, importância e
+%% justificativa da escolha do tema, delimitações
+%% do assunto, formulação de hipóteses e objetivos
+%% da pesquisa e estrutura do trabalho.
+
+%% Título e rótulo de capítulo (rótulos não devem conter caracteres especiais, acentuados ou cedilha)
+\chapter{Introdução}\label{cap:introducao}
+
+\section{Motivação}
+Um recurso que está começando a se tornar popular em dispositivos de captura de vídeo apenas recentemente é a estabilização mecânica. Para pequenas vibrações, a estabilização eletrônica ou digital (já existente a alguns anos) já é suficiente para melhorar a qualidade de fotos, esta é feita via software, através de um algoritmo que tenta minimizar a vibração do dispositivo, no entanto, sua aplicação para vídeos ainda apresenta alguns problemas, uma vez que tal estabilização exige que cada quadro do vídeo seja trabalhado de forma diferente pelo algoritmo, de modo que a gravação final tenha uma boa estabilização, o que pode custar muito do processamento de um dispositivo. Outro mecanismo existente é a estabilização óptica, que, através de sensores embutidos no dispositivo, identifica os movimentos realizados, e através de pequenos motores, ajusta a posição das lentes de modo a obter imagens mais estáveis durante a gravação. Esta é uma solução melhor que a típica estabilização digital presente na maioria dos dispositivos de gravação, como celulares e pequenas câmeras, mas ainda é um recurso com limitações, e para dar a um dispositivo a melhor estabilização possível, foi criado um equipamento externo para realizar esta função.\\
+\indent A estabilização mecânica realizada por um dispositivo externo não possui as limitações de movimentação do dispositivo de gravação, mesmo que a base onde o estabilizador externo é fixado se mova, sua estrutura articulada realiza os movimentos contrários aos realizados pela base, anulando os movimentos e deixando o dispositivo anexado a esta estrutura estabilizado. Este é um recurso caro e economicamente indisponível para a grande parte das pessoas.
+
+\section{Objetivos}
+
+    \subsection{Objetivo geral}
+    Criação de um dispositivo de estabilização externa que possua uma estrutura articulada que se movimente em dois eixos, de modo a deixar sua base acoplada, estabilizada, e como consequência, o dispositivo de vídeo anexado a esta base, também estabilizado. Tal equipamento deve ser composto por atuadores e sensores acoplados à um microcontrolador Arduino.
+    
+    \subsection{Objetivos específicos}
+    
+        \begin{itemize}
+            \item O equipamento deve operar com baterias, estas devem ser carregadas externamente.
+            \item O equipamento deve estabilizar uma base através da movimentação de dois eixos de rotação, um eixo mantendo a inclinação vertical, e outro eixo mantendo a inclinação horizontal.
+            \item O equipamento deve permitir a mudança de orientação da base (onde é fixado o dispositivo externo) através de um joystick analógico, com o switch tendo a função de posicionar a base de volta a posição original.
+            \item A base presa à estrutura articulada deve possibilitar anexar um smartphone ou uma câmera externa com peso de até 300 gramas, sendo esse valor definido pela resistência tolerada pela estrutura impressa.
+            \item Deve ser feita uma placa de circuito específica para o dispositivo.
+            \item A estrutura do equipamento deve ser produzida por uma impressora 3D.
+        \end{itemize}

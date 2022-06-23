@@ -1,0 +1,307 @@
+%% UTFPRCT-TEX, v1.0.6 wmeira on 2021/10/11
+%% Copyright (C) 2020- by William H. T. Meira
+%%
+%% Modified version of project 'utfprpgtex' maintained 
+%% by Luiz E. M. Lima
+%%
+%% This work may be distributed and/or modified under the
+%% conditions of the LaTeX Project Public License, either version 1.3
+%% of this license or (at your option) any later version.
+%% The latest version of this license is in
+%%   http://www.latex-project.org/lppl.txt
+%% and version 1.3 or later is part of all distributions of LaTeX
+%% version 2005/12/01 or later.
+%%
+%% This work has the LPPL maintenance status `maintained'.
+%%
+%% The Current Maintainer of this work is William H. T. Meira.
+%%
+%% This project consists mainly of files: 'utfprct.cls', 'utfprct.tex', 
+%% 'utfprct-dados.tex' 
+%% 
+%% The 'abntex2-alf.bst' and 'abntex2-num.bst' files are slightly
+%% modified versions of the bibtex styles from abntex2 (v.1.9.7)
+%% package to suit NBR6023/2018 (not yet implemented there). 
+%% Complementary, 'abntex2-alf-en.bst' and 'abntex2-num-en.bst' are
+%% english versions of the respective bibtex styles.
+%%
+%% Contribute to improve this project (github repo):
+%% https://github.com/wmeira/utfprct-tex
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Tutorial do Documento de Dados 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% O 'utfprct-dados.tex' contém todos as informações do documento, 
+%% metadados e outros valores importantes para o preenchimento dos 
+%% elementos pré-textuais: capa, folha de rosto, resumo, abstract.
+%% 
+%% Não é necessário preencher todos os campos, existem campos mais
+%% específicos para o tipo de documento sendo elaborado. Quando TCC,
+%% por exemplo, não é necessário definir dados do programa de 
+%% pós-graduação. Todos os dados inseridos estarão disponíveis para
+%% inserção no tex usando o padrão '\imprimir + nomedodadominusculo'. 
+%% Por exemplo, para imprimir o tipo do documento ('\TipoDeDocumento'),
+%% usar '\imprimirtipodedocumento'.
+%%
+%% É possível customizar a descrição do documento na folha de rosto. 
+%% Exemplos de descrição são fornecidos para guiar a escrita do texto,
+%% em que pode-se utilizar os dados já definidos com o padrão descrito.
+%%
+%% Existe a possibilidade de inserir dados de uma instituição de 
+%% cotutela quando se aplicar. 
+%%
+%% Os dados da ficha catalográfica são fornecidos pela biblioteca
+%% e, na maioria das vezes, apenas anexa-se a folha digitalizada
+%% na região definida dos elementos pré-textuais.
+%%
+%% A folha de aprovação é, na maioria das vezes, fornecido 
+%% digitalmente pelo departamento ou pelo orientador após a defesa e 
+%% deverá ser anexada ao documento na região definida dos elementos 
+%% pré-textuais. Recomenda-se apenas anexar a folha de aprovação sem
+%% precisar alterar os dados específicos aqui presentes, pois foram
+%% criados originalmente para o template da folha de aprovação da
+%% UTFPR-PG, presente no projeto base, e foram apenas mantidos.
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Informações do Documento
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% Tipo de documento (opções: "Tese", "Dissertação", "Trabalho de Conclusão de Curso"
+\TipoDeDocumento{Oficina de integração 1 - Relatório Final}%copiar exatamente uma das opções 
+
+%% [abstract] Document type: "Thesis", "Dissertation", "Bachelor Thesis"
+%\DocumentType{Thesis}%
+
+%% Nível de formação: "Doutorado", "Mestrado", "Bacharelado"
+%\NivelDeFormacao{Doutorado}%
+
+%% [abstract] Formation level: "Doctorate", "PhD", "Master's Degree", "Bachelor's Degree"
+%\FormationLevel{PhD}%
+
+%% Título ou grau pretendido: "Doutor", "Mestre" ou "Bacharel"
+%\TituloPretendido{Doutor}%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Por padrão, o título principal será o \TituloDoDocumento (português)
+%% Se a língua do documento for definida como inglês, será o \DocumentTitle
+
+%% Título do documento em PORTUGUÊS (resumo)
+\TituloDoDocumento{%%
+EEX21_Equipe5_Relatório_EstabilizadorDeDoisEixosParaCâmeras
+}%
+
+
+%% Título em múltiplas linhas na capa, folha de rosto e termo de aprovação
+%% Use o comando \par para indicar a quebra de linha
+%%
+%% A CAPA apresentará o título no formato de múltiplas linhas
+%% para a respectiva língua do documento definida.
+%%
+%% Na folha de rosto, caso a língua do documento não seja português, aparecerá o
+%% \TituloEmMultiplasLinhasIngles seguido pela tradução \TituloEmMultiplasLinhas
+%%
+\TituloEmMultiplasLinhas{%%
+Estabilizador de dois eixos para câmeras
+}%
+
+\TituloEmMultiplasLinhasIngles{%%
+\par
+}%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%% Data da defesa
+%\Dia{1}%% Dia (opcional: usado na ficha catalográfica apenas)
+%\MesPorExtenso{janeiro}%% mês por extenso (opcional: usado na ficha catalográfica apenas)
+\Ano{2022}%% Ano
+
+%% Palavras-chave e keywords (máximo 5)
+\NumeroDePalavrasChave{5}%% Número de palavras-chave 
+\PalavraChaveA{Estabilizador para câmeras}%% Palavra-chave A
+\PalavraChaveB{Servo motores}%% Palavra-chave B
+\PalavraChaveC{Suporte articulado}%% Palavra-chave C
+\PalavraChaveD{Manipulação de dados com arduino}%% Palavra-chave D
+%\PalavraChaveE{Palavra-chave E}%% Palavra-chave E
+
+\NumeroDeKeywords{\imprimirnumerodepalavraschave}%% Número de keywords (mesmo que palavras-chave)
+\KeywordA{Keyword A}%% Keyword A
+\KeywordB{Keyword B}%% Keyword B
+\KeywordC{Keyword C}%% Keyword C
+\KeywordD{Keyword D}%% Keyword D
+\KeywordE{Keyword E}%% Keyword E
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Informação do Autor(a) ou Autores(as) (TCC)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%% Autor(a)
+%% Usado para citação: "\SobrenomeDoAutor, PrenomeDoAutor" (ex: "Doe, John" ou "Doe, J.")
+\NomeDoAutor{Henrique Francisco Knapp}%% Nome completo do(a) autor(a)
+%\SobrenomeDoAutor{Último Nome}%% Último nome do(a) autor(a)
+%\PrenomeDoAutor{Nome do(a) Autor(a) Sem Último}%% Nome do(a) autor(a) sem último nome
+
+%%% Autor(a) 2 (opcional)
+%% *Considera apenas se "\TipoDeDocumento" == "Trabalho de Conclusão de Curso"
+\AtribuiAutorDois{true}%% Insere ou remove autor(a) 2: "true" ou "false"
+\NomeDoAutorDois{Fernando Henrique Ratusznei Caetano}%% Nome completo do(a) autor(a) 2
+%\SobrenomeDoAutorDois{Último Nome}%% Último nome do(a) autor(a) 2
+%\PrenomeDoAutorDois{Nome do(a) Autor(a) 2 Sem Último}%% Nome do(a) autor(a) 2 sem último nome
+
+%%% Autor(a) 3 (opcional)
+%% *Considera apenas se "\TipoDeDocumento" == "Trabalho de Conclusão de Curso"
+\AtribuiAutorTres{true}%% Insere ou remove autor(a) 3: "true" ou "false"
+\NomeDoAutorTres{Robson Borges Dos Santos}%% Nome completo do(a) autor(a) 3
+%\SobrenomeDoAutorTres{Último Nome}%% Último nome do(a) autor(a) 3
+%\PrenomeDoAutorTres{Nome do(a) Autor(a) 3 Sem Último}%% Nome do(a) autor(a) 3 sem último nome
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Informações do Orientador(a) e Coorientador(a)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% Orientador(a)
+%% Usado para citação: "\SobrenomeDoOrientador, PrenomeDoOrientador" (ex: "Doe, John" ou "Doe, J.")
+\AtribuicaoOrientador{Orientador(a)}%% Atribuição "Orientador(a)"
+\TituloDoOrientador{Prof(a). Dr(a).}%% Título do(a) orientador(a)
+\NomeDoOrientador{Nome Completo do(a) Orientador(a)}%% Nome completo do(a) orientador(a)
+\SobrenomeDoOrienador{Último Nome}%% Último nome do(a) orientador(a)
+\PrenomeDoOrientador{Nome do(a) Orientador(a) Sem Último}%% Nome do(a) orientador(a) sem último nome
+
+%% Coorientador(a) (opcional)
+%% Usado para citação: "\SobrenomeDoCoorientador, PrenomeDoCoorientador" (ex: "Doe, John" ou "Doe, J.")
+\AtribuiCoorientador{true}%% Insere ou remove o(a) coorientador(a): "true" ou "false"
+\AtribuicaoCoorientador{Coorientador(a)}%% Atribuição "Coorientador(a)"
+\TituloDoCoorientador{Prof(a). Dr(a).}%% Título do(a) coorientador(a)
+\NomeDoCoorientador{Nome Completo do(a) Coorientador(a)}%% Nome completo do(a) coorientador(a)
+\SobrenomeDoCoorienador{Último Nome}%% Último nome do(a) coorientador(a)
+\PrenomeDoCoorientador{Nome do(a) Coorientador(a) Sem Último}%% Nome do(a) coorientador(a) sem último nome
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Informações da Instituição
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% Nome da instituição
+\Instituicao{Universidade Tecnológica Federal do Paraná}
+
+%% [abstract] Institution name (*nome sem traduzir é o recomendado para docs. da UTFPR)
+%\Institution{Universidade Tecnológica Federal do Paraná}
+
+%% Sigla da Instituição
+\SiglaInstituicao{UTFPR}
+
+%% Nome da cidade (câmpus)
+\Cidade{Curitiba}
+
+%% Diretoria: "Graduação e Educação Profissional" ou "Pesquisa e Pós-Graduação" (opcional)
+%\Diretoria{Pesquisa e Pós-Graduação}
+
+%% Nome do departamento ou da coordenação (opcional: mais comum no Bacharelado: Departamento de Informática)
+\Departamento{Curso de Engenharia de Computação}
+
+%% Sigla do departamento (opcional, ex: DAINF, DAMEC, DAMAT...)
+%\SiglaDepartamento{DPT}
+
+%% Nome do curso bachalerado ou pós-graduação (PPG) (ex: "Engenharia de Computação",  "Engenharia El{\'e}trica e Inform{\'a}tica Industrial") 
+\Curso{Engenharia de Computação}
+
+
+%% Programa ou nome do curso completo (capa)
+%% "Bachalerado em Engenharia de Computação"
+%% "Programa de Pós-Graduação em Engenharia Elétrica e Informática Industrial"
+\Programa{Programa de Pós-Graduação em \imprimircurso}
+
+%% Sigla do programa de pós-graduação (opcional, ex: CPGEI, PPGCA)
+\SiglaDoPPG{PPG}
+
+%% Nome da área de concentração
+\AreaDeConcentracao{Nome da Área de Concentração}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Informações de Cotutela (Duplo Grau) (opcional)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% Insere dados de cotutela: "true" ou "false"
+\AtribuiCotutela{false}
+
+%% Nome da instituição de cotutela
+\InstituicaoCotutela{Universidade Da Cotutela}
+
+%% [abstract] Institution name
+\InstitutionCotutela{Double Degree University}
+
+%% Sigla da instituição de cotutela
+\SiglaInstituicaoCotutela{UC}
+
+%% Nome do departamento ou da coordenação da inst. de cotutela (mais comum no Bacharelado: Departamento de Informática)
+\DepartamentoCotutela{Nome do Departamento ou da Coordenação}
+
+%% Sigla do departamento da inst. cotutela (ex: DAINF, DAMEC, DAMAT...)
+\SiglaDepartamentoCotutela{DPT-EXT}
+
+%% Nome do curso bachalerado ou pós-graduação (PPG) na instituição de cotutela (ex: "Engenharia de Computação",  "Engenharia El{\'e}trica e Inform{\'a}tica Industrial")
+\CursoCotutela{Nome do Curso Cotutela}
+
+%% [abstract] Course name 
+\CourseCotutela{Second Degree Course}
+
+%% Programa ou nome do curso completo na inst. cotutela (capa)
+%% "Bachalerado em Engenharia de Computação"
+%% "Programa de Pós-Graduação em Engenharia Elétrica e Informática Industrial"
+\ProgramaCotutela{Programa de Doutoral em \imprimircursocotutela}
+
+%% Sigla do programa externo de pós-graduação
+\SiglaDoPPGCotutela{PPG-EXT}
+
+%% Nome da área de concentração na instituição de cotutela
+\AreaDeConcentracaoCotutela{Nome da Área de Concentração}
+
+%% Nível de formação que será fornecido na referência do doc.
+\NivelDeFormacaoResumo{Duplo doutorado}
+\FormationLevelAbstract{Double PhD}
+
+%% Informacoes do orientador(a) na instituição de cotutela
+
+%% Orientador(a) da instituição de cotutela
+%% Usado para citação: "\SobrenomeDoOrientador, PrenomeDoOrientador" (ex: "Doe, John" ou "Doe, J.")
+\AtribuicaoOrientadorCotutela{Orientador(a)}%% Atribuição "Orientador(a)"
+\TituloDoOrientadorCotutela{Prof(a). Dr(a).}%% Título do(a) orientador(a)
+\NomeDoOrientadorCotutela{Nome Completo do(a) Orientador(a)}%% Nome completo do(a) orientador(a)
+\SobrenomeDoOrienadorCotutela{Último Nome}%% Último nome do(a) orientador(a)
+\PrenomeDoOrientadorCotutela{Nome do(a) Orientador(a) Sem Último}%% Nome do(a) orientador(a) sem último nome
+
+%% Coorientador(a) da instituição de cotutela
+%% Usado para citação: "\SobrenomeDoCoorientador, PrenomeDoCoorientador" (ex: "Doe, John" ou "Doe, J.")
+\AtribuiCoorientadorCotutela{false}%% Insere ou remove o(a) coorientador(a) da cotutela: "true" ou "false"
+\AtribuicaoCoorientadorCotutela{Coorientador(a)}%% Atribuição "Coorientador(a)"
+\TituloDoCoorientadorCotutela{Prof(a). Dr(a).}%% Título do(a) coorientador(a)
+\NomeDoCoorientadorCotutela{Nome Completo do(a) Coorientador(a)}%% Nome completo do(a) coorientador(a)
+\SobrenomeDoCoorienadorCotutela{Último Nome}%% Último nome do(a) coorientador(a)
+\PrenomeDoCoorientadorCotutela{Nome do(a) Coorientador(a) Sem Último}%% Nome do(a) coorientador(a) sem último nome
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Folha de Rosto
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% Descrição do documento na folha de rosto (exemplos)
+\DescricaoDoDocumento{
+Relatório final do projeto desenvolvido na disciplina de Oficina de Integração 1, do curso de Engenharia de Computação, da
+Universidade Tecnológica Federal do Paraná (UTFPR).\\
+\\Orientadores:\\Prof. Juliano Mourão Vieira.\\Prof. Ronnier Frates Rohrich
+}
+
+
+%% Insere ou remove descrição da cotutela (extra) na folha de rosto: "true" ou "false". 
+%% Se "true", a descrição do documento será colocada na folha de rosto, logo abaixo do orientador(a) e coorientador(a) da primeira inst. e depois o orientador(a) e coorientador(a) da inst. de cotutela. 
+%% Se "false", os nomes do orientador(a) e coorientador(a) aparecerão logo abaixo do orientador(a) da primeira instituição, sem uma descrição extra. Neste caso, recomenda-se revisar a "\DescricaoDoDocumento" para contemplar ambas as instituições.   
+\AtribuiDescricaoCotutela{false}
+
+%% Segunda Descricao da Inst. de Cotutela na folha de rosto (exemplos)
+\DescricaoDoDocumentoCotutela{
+\imprimirtipodedocumento\ apresentado(a) como requisito à obtenção do título de \imprimirtitulopretendido\ em \imprimircursocotutela, do \imprimirppgoudepartamentocotutela, da \imprimirinstituicaocotutela.  
+\imprimirtipodedocumento\ apresentada à Comissão de Acompanhamento de Tese do Programa Doutoral em \imprimircursocotutela\ do \imprimirinstituicaocotutela\ (\imprimirsiglainstituicaocotutela) como requisito à obtenção de grau de \imprimirtitulopretendido\ na área de concentração \imprimirareadeconcentracaocotutela.
+}
