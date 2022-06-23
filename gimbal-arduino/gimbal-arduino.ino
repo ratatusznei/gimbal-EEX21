@@ -14,9 +14,6 @@ Sequencia de funcionamento (loop):
     -Com limitantes de velocidade (sem guinadas -> movimentação suave dentro dos limites de velocidade)
 */
 
-// imagens do acelerometro:
-//https://bdm.unb.br/bitstream/10483/23639/1/2018_EduardoSousaSalesRodrigues_tcc.pdf
-
 Imu imu;
 ServoController servos;
 Joystick joystick;
