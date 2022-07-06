@@ -1,5 +1,13 @@
 # Sistema estabilizador de dois eixos para câmera - Gimbal
 
+###### Autores em ordem alfabética
+[Fernando](https://github.com/ratatusznei)
+
+[Henrique](https://github.com/HenriqueKnapp)
+
+[Robson](https://github.com/robson1622)
+
+
 ![Dispositivo montado sem celular](./img/dispositivo.jpeg "Dispositivo montado sem celular")
 
 Foto do dispositivo montado sem o celular no suporte.
